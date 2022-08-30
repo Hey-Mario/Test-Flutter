@@ -80,6 +80,13 @@ class _MypageState extends State<Mypage> {
               width: 300,
               height: 350,
             ),
+            //CachedNetworkImage(
+            //  placeholder: (context, url) => CircularProgressIndicator(),
+            //  imageUrl:
+            //      "https://github.com/Hey-Mario/Test-Flutter/blob/master/assets/images/mario.jpg?raw=true",
+            //  width: 300,
+            //  height: 350,
+            //),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
