@@ -75,7 +75,8 @@ class _MypageState extends State<Mypage> {
             ),
             FadeInImage.assetNetwork(
               placeholder: "assets/images/loader.gif",
-              image: "assets/images/mario.jpg",
+              image:
+                  "https://github.com/Hey-Mario/Test-Flutter/blob/master/assets/images/mario.jpg?raw=true",
               width: 300,
               height: 350,
             ),
