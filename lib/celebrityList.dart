@@ -2,7 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/celebrity.dart';
 
-class CelebrityList extends StatelessWidget {
+class CelebrityList extends StatefulWidget {
+  const CelebrityList({super.key});
+
+  @override
+  State<CelebrityList> createState() => _CelebrityListState();
+}
+
+class _CelebrityListState extends State<CelebrityList> {
   final List<Celebrity> celebrity = [
     Celebrity(
       "Mario Randriamanantena",
@@ -75,8 +82,6 @@ class CelebrityList extends StatelessWidget {
       101,
     ),
   ];
-
-  CelebrityList({super.key});
 
   @override
   Widget build(BuildContext context) {
