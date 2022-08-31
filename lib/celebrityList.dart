@@ -10,7 +10,7 @@ class CelebrityList extends StatefulWidget {
 }
 
 class _CelebrityListState extends State<CelebrityList> {
-  final List<Celebrity> celebrity = [
+  final List<Celebrity> celebritys = [
     Celebrity(
       "Mario Randriamanantena",
       "https://github.com/Hey-Mario/Test-Flutter/blob/master/assets/images/mario.jpg?raw=true",
@@ -90,9 +90,21 @@ class _CelebrityListState extends State<CelebrityList> {
           title: const Text('Liste des célébrités actuels'),
         ),
         body: ListView.builder(
-          itemCount: celebrity.length,
+          itemCount: celebritys.length,
           itemBuilder: ((context, index) {
-            return CelebrityListItem(celebrity: celebrity[index]);
+            final celebrity = celebritys[index];
+            return Dismissible(
+                key: Key(
+                  celebrity.name,
+                ),
+                onDismissed: (direction) {
+                  setState(() {
+                    celebritys.removeAt(index);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("${celebrity.name} supprimé Madarfraka")));
+                },
+                child: CelebrityListItem(celebrity: celebrity));
           }),
         ));
   }
@@ -105,6 +117,9 @@ class CelebrityListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
       margin: const EdgeInsets.all(8),
       elevation: 8.0,
       child: Row(
