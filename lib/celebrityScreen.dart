@@ -43,7 +43,7 @@ class CelebrityScreen extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         celebrity.description,
-        style: const TextStyle(fontSize: 25),
+        style: const TextStyle(fontSize: 20),
       ),
     );
 
