@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/celebrity.dart';
@@ -122,7 +124,7 @@ class ScaleRotateRoute extends PageRouteBuilder {
             Animation<double> secondaryAnimation,
           ) =>
               page,
-          transitionDuration: Duration(seconds: 1),
+          transitionDuration: Duration(seconds: 2),
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -136,7 +138,7 @@ class ScaleRotateRoute extends PageRouteBuilder {
             ).animate(
               CurvedAnimation(
                 parent: animation,
-                curve: Curves.fastOutSlowIn,
+                curve: Curves.bounceIn,
               ),
             ),
             child: RotationTransition(
@@ -146,7 +148,7 @@ class ScaleRotateRoute extends PageRouteBuilder {
               ).animate(
                 CurvedAnimation(
                   parent: animation,
-                  curve: Curves.linear,
+                  curve: Curves.fastOutSlowIn,
                 ),
               ),
               child: child,
@@ -165,11 +167,7 @@ class CelebrityListItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              ScaleRotateRoute(
-                page: CelebrityScreen(celebrity: celebrity),
-              ));
+          Navigator.of(context).push(_createRoute(celebrity));
         },
         child: Card(
             shape: RoundedRectangleBorder(
@@ -218,4 +216,35 @@ class CelebrityListItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class RouteGenerator {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(builder: (context) => CelebrityList());
+      //case '/celebrity':
+      //var data = settings.arguments;
+      //  return PageRouteBuilder(
+      //    pageBuilder: (context, animation, secondaryAnimation) => CelebrityScreen(celebrity: data),
+      //    );
+      default:
+        return MaterialPageRoute(
+            builder: (context) => Scaffold(
+                  appBar: AppBar(
+                    title: const Text("Error"),
+                  ),
+                  body: const Center(
+                    child: Text("Page not found"),
+                  ),
+                ));
+    }
+  }
+}
+
+Route _createRoute(Celebrity celebrity) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        CelebrityScreen(celebrity: celebrity),
+  );
 }
